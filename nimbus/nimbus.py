@@ -60,6 +60,7 @@ class Kilonova_Inference():
             Absolute magnitude light curve as a function of time (same shape as
             t).
         """
+        print('Returning powerlaw')
         return (M_0 * pow(t_0/t, gamma))
 
     def lc_model_linear(self, M_0, alpha, t_0, t):
@@ -143,6 +144,7 @@ class Kilonova_Inference():
         #set min,max distances as 0 Mpc, 4000 Mpc
         a = (0. - mu_f)/sigma_f
         b = (4000. - mu_f)/sigma_f
+        print('Returning TND')
         return truncnorm(a, b, mu_f, sigma_f)
 
     def calc_expit_argument(self,d_lim,maglim_err=0.1):
@@ -183,6 +185,7 @@ class Kilonova_Inference():
         N_samples_survey = len(dist_samples_survey)
         N_samples_high = len(dist_samples_high)
         N_total = N_samples_survey + N_samples_high
+        print('Calculating likelihood integral')
         if (N_samples_survey==0)&(N_samples_high!=0):
             return 1./(mhigh-mlow)
         elif (N_samples_survey!=0)&(N_samples_high==0):
@@ -266,6 +269,7 @@ class Kilonova_Inference():
             self.dlim(m_low,M)+eps, self.dlim(m_high,M))[0] +\
             quad(lambda d : (1./(m_high - m_low))*p_d(d), self.dlim(m_high,M),
             dmax)[0]
+        print('Trying to return likelihood of a single observation')
         den = quad(
             lambda m: quad(
             lambda d : (1./(self.M_to_m(M, d) - m_low))*\

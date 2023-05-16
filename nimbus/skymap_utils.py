@@ -60,6 +60,7 @@ class Skymap_Probability():
         self.distmu = hp.ud_grade(distmu, 256)
         self.distsigma = hp.ud_grade(distsigma, 256)
         self.distnorm = hp.ud_grade(distnorm, 256)
+        print('Skymap file ingested')
 
     def calculate_field_prob(self, ipix_field):
         """
