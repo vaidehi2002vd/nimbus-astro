@@ -88,6 +88,7 @@ def main():
         ext_g = df_survey.A_g.values[df_survey.field_ID==field_num][0]
         ext_r = df_survey.A_r.values[df_survey.field_ID==field_num][0]
         ext_i = df_survey.A_i.values[df_survey.field_ID==field_num][0]
+        print('Survey file read')
 
     data = pd.read_csv(data_file)
     #data.columns = data.columns.str.replace(' ','')
@@ -114,11 +115,13 @@ def main():
     field_prob = skymap_prob.calculate_field_prob(ipix_field)
     p_d_f = skymap_prob.construct_margdist_distribution(ipix_field,
     							       field_prob)
+    print('No errors in skymap_utils.py')
 
     kne_inf = nimbus.Kilonova_Inference(
     				   lc_model_funcs = [lc_model_linear,
     				   lc_model_linear, lc_model_linear],
     				   nullevent_mlim_pdf = nullevent_mlim_pdf)
+    print('Using nimbus.py for calculations')
 
     mlims_array = np.array([get_mlims_from_data(data_event, field_num, T) for T
     		      in filter_obs_times])
