@@ -350,7 +350,7 @@ class Kilonova_Inference():
         M = np.array([self.lc_model_funcs[fid-1](*params, t_0=t0, t=t)\
                     for t in T])
         dlims = np.array(list(map(self.dlim, mlims, M)))
-        pool = Pool(processes=2)
+        pool = Pool(processes=8)
         plims_f_t = pool.starmap(partial(self.create_dlim_pdf, p_d=p_d_f,
                                 d_min=dmin, d_max=dmax),
                                 np.c_[M,dlims,maglimerrs,norm_factors])
@@ -470,7 +470,7 @@ class Kilonova_Inference():
         M = np.array([self.lc_model_funcs[fid-1](*params, t_0=t0, t=t)\
                     for t in T])
         dlims = np.array(list(map(self.dlim, mlims, M)))
-        pool = Pool(processes=2)
+        pool = Pool(processes=8)
         plims_f_t = pool.starmap(partial(self.create_mlim_pdf, p_d=p_d_f,
                                 m_low=mlow_a,m_high=mhigh_a),
                                 np.c_[M,dlims,maglimerrs])
